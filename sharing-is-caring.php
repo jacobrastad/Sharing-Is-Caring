@@ -11,7 +11,7 @@ License: GPL2
 Copyright 2012 Michael Beacom  (email : michael.beacom@gmail.com)
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
+it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
@@ -55,8 +55,8 @@ function sic_detect_custom_post_types() {
 	$args=array(
 		'public'   => true,
 		'_builtin' => false
-	); 
-	$post_types=get_post_types($args); 
+	);
+	$post_types=get_post_types($args);
 	$options_arr=array();
 	foreach ($post_types  as &$post_type ) {
 		$options_arr["custom_type_$post_type"] = "0";
@@ -68,7 +68,7 @@ function sic_detect_custom_post_types() {
 // Define default option settings
 function sic_add_defaults() {
 
-	
+
 	$tmp = get_option('sic_options');
     if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
 		delete_option('sic_options'); //(don't think this is needed but leave for now)
@@ -107,7 +107,7 @@ function sic_add_defaults() {
 					"default_apple_image" => "", // { '', url } text (url)
 					"html5" => "0", // { 0, 0-1 } checkbox
 					"box_title" => "", // { '', any text } text
-					"box_title_css" => "" // { '', any css code } text 
+					"box_title_css" => "" // { '', any css code } text
 		);
 		$arr=array_merge($arr,sic_detect_custom_post_types());
 		update_option('sic_options', $arr);
@@ -136,10 +136,10 @@ function sic_render_form() {
 			<?php $options = get_option('sic_options'); ?>
 			<table class="form-table">
 				<tr><th scope="rowgroup" rowspan="5">Position Options</th>
-				
+
 					<td>
 						<label for="sic_options[fb_position]">Facebook: </label>
-					</td><td>	
+					</td><td>
 						<select name="sic_options[fb_position]">
 							<option value="0" <?php selected('0', $options['fb_position']); ?>>Don't display</option>
 							<option value="1" <?php selected('1', $options['fb_position']); ?>>Position 1</option>
@@ -151,7 +151,7 @@ function sic_render_form() {
 				</tr><tr>
 					<td>
 						<label for="sic_options[twitter_position]">Twitter: </label>
-					</td><td>	
+					</td><td>
 						<select name="sic_options[twitter_position]">
 							<option value="0" <?php selected('0', $options['twitter_position']); ?>>Don't display</option>
 							<option value="1" <?php selected('1', $options['twitter_position']); ?>>Position 1</option>
@@ -175,7 +175,7 @@ function sic_render_form() {
 				</tr><tr>
 					<td>
 						<label for="sic_options[pinterest_position]">Pinterest: </label>
-					</td><td>	
+					</td><td>
 						<select name="sic_options[pinterest_position]">
 							<option value="0" <?php selected('0', $options['pinterest_position']); ?>>Don't display</option>
 							<option value="1" <?php selected('1', $options['pinterest_position']); ?>>Position 1</option>
@@ -186,11 +186,11 @@ function sic_render_form() {
 					</td>
 				</tr><tr>
 					<td colspan="2">
-	
+
 						<em>(Make sure you specify different positions for each.)</em>
 					</td>
 				</tr>
-				
+
 				<tr valign="top">
 					<th scope="row">Display Options</th>
 					<td>
@@ -209,7 +209,7 @@ function sic_render_form() {
 							?>
 							<label><input name="sic_options[<?php echo $type; ?>]" type="checkbox" value="1" <?php if (isset($options[$type])) { checked('1', $options[$type]); } ?> /> Display on <?php echo str_replace("custom_type_", "", $type); ?> index pages</label><br />
 							<?php
-						}						
+						}
 						?>
 						<em>Note: do not display on pages that show excerpts instead of full posts.  This varies depending on your theme.</em>
 					</td><td>
@@ -222,7 +222,7 @@ function sic_render_form() {
 					<td colspan="2">
 						<label><input type="text" size="55" name="sic_options[box_title]" value="<?php echo $options['box_title']; ?>" /> Optional text for box title.</label><br />
 						<label><input type="text" size="55" name="sic_options[box_title_css]" value="<?php echo $options['box_title_css']; ?>" /> Optional css for box title.</label><br />
-						<br />						
+						<br />
 						<label><input type="text" size="55" name="sic_options[css_all]" value="<?php echo $options['css_all']; ?>" /> Css styles to apply to the group.</label><br />
 						<label><input type="text" size="55" name="sic_options[css_each]" value="<?php echo $options['css_each']; ?>" /> Css styles to apply to each item in the group.</label><br />
 						<br />
@@ -233,21 +233,21 @@ function sic_render_form() {
 						<br />
 						<label><input name="sic_options[html5]" type="checkbox" value="1" <?php if (isset($options['html5'])) { checked('1', $options['html5']); } ?> /> Use html5.</label><br />
 					</td>
-				</tr>				
+				</tr>
 				<tr>
 					<th scope="rowgroup" rowspan="17">Overextended Options</th>
-				</tr><tr>	
+				</tr><tr>
 					<th scope="colgroup" colspan="2"><h4>Facebook</h4></th>
 				</tr><tr>
 					<td>
 						<input type="text" size="15" name="sic_options[fb_app_id]" value="<?php echo $options['fb_app_id']; ?>" />
-					</td><td>	
+					</td><td>
 						<label for="sic_options[fb_app_id]">Facebook App ID</label> <a href="https://developers.facebook.com/apps/?action=create"><em>(get one here)</em></a>
 					</td>
 				</tr><tr>
 					<td>
 						<input type="text" size="15" name="sic_options[fb_width]" value="<?php echo $options['fb_width']; ?>" />
-					</td><td>	
+					</td><td>
 						<label for="sic_options[fb_width]">Width in pixels</label> <em>(standard layout: min=225, default=450; button_count min:90, default:90; box_count min:55 default:55)</em>
 					</td>
 				</tr><tr>
@@ -273,10 +273,10 @@ function sic_render_form() {
 						<select name="sic_options[fb_action]">
 							<option value="like" <?php selected('like', $options['fb_action']); ?>>Like</option>
 							<option value="recommend" <?php selected('recommend', $options['fb_action']); ?>>Recommend</option>
-						</select>						
+						</select>
 					</td>
 				</tr><tr>
-					<td>	
+					<td>
 						<label for="sic_options[fb_font]">Font: </label>
 					</td><td>
 						<select name="sic_options[fb_font]">
@@ -286,10 +286,10 @@ function sic_render_form() {
 							<option value="tahoma" <?php selected('tahoma', $options['fb_font']); ?>>tahoma</option>
 							<option value="trebuchet ms" <?php selected('trebuchet ms', $options['fb_font']); ?>>trebuchet ms</option>
 							<option value="verdana" <?php selected('verdana', $options['fb_font']); ?>>verdana</option>
-						</select>								
+						</select>
 					</td>
 				</tr><tr>
-					<td>	
+					<td>
 						<label for="sic_options[fb_colorscheme]">Colorscheme: </label>
 					</td><td>
 						<select name="sic_options[fb_colorscheme]">
@@ -300,16 +300,16 @@ function sic_render_form() {
 				</tr><tr>
 					<th scope="colgroup" colspan="2"><h4>Twitter</h4></th>
 				</tr><tr>
-					<td>	
+					<td>
 						<label for="sic_options[twitter_size]">Size: </label>
 					</td><td>
 						<select name="sic_options[twitter_size]">
 							<option value="medium" <?php selected('medium', $options['twitter_size']); ?>>medium</option>
 							<option value="large" <?php selected('large', $options['twitter_size']); ?>>large</option>
-						</select>	
+						</select>
 					</td>
 				</tr><tr>
-					<td>													
+					<td>
 						<label for="sic_options[twitter_count]">Count: </label>
 					</td><td>
 						<select name="sic_options[twitter_count]">
@@ -318,43 +318,43 @@ function sic_render_form() {
 							<option value="vertical" <?php selected('vertical', $options['twitter_count']); ?>>vertical</option>
 						</select>
 					</td>
-				</tr><tr>							
+				</tr><tr>
 					<th scope="colgroup" colspan="2"><h4>Google+</h4></th>
 				</tr><tr>
-					<td>	
+					<td>
 						<label for="sic_options[g_plus_size]">Size: </label>
-					</td><td>	
+					</td><td>
 						<select name="sic_options[g_plus_size]">
 							<option value="standard" <?php selected('standard', $options['g_plus_size']); ?>>standard</option>
 							<option value="small" <?php selected('small', $options['g_plus_size']); ?>>small</option>
 							<option value="medium" <?php selected('medium', $options['g_plus_size']); ?>>medium</option>
 							<option value="tall" <?php selected('tall', $options['g_plus_size']); ?>>tall</option>
-						</select>	
+						</select>
 					</td>
 				</tr><tr>
-					<td>													
+					<td>
 						<label for="sic_options[g_plus_annotation]">Count: </label>
 					</td><td>
 						<select name="sic_options[g_plus_annotation]">
 							<option value="none" <?php selected('none', $options['g_plus_annotation']); ?>>none</option>
 							<option value="bubble" <?php selected('bubble', $options['g_plus_annotation']); ?>>bubble</option>
 							<option value="inline" <?php selected('inline', $options['g_plus_annotation']); ?>>inline</option>
-						</select>						
+						</select>
 					</td>
 				</tr><tr>
 					<th scope="colgroup" colspan="2"><h4>Pinterest</h4></th>
 				</tr><tr>
-					<td>	
+					<td>
 						<label for="sic_options[pinterest_layout]">Count: </label>
 					</td><td>
 						<select name="sic_options[pinterest_layout]">
 							<option value="none" <?php selected('none', $options['pinterest_layout']); ?>>none</option>
 							<option value="vertical" <?php selected('vertical', $options['pinterest_layout']); ?>>vertical</option>
 							<option value="horizontal" <?php selected('horizontal', $options['pinterest_layout']); ?>>horizontal</option>
-						</select>	
-						
+						</select>
+
 					</td>
-				</tr>				
+				</tr>
 
 			</table>
 			<p class="submit">
@@ -363,8 +363,8 @@ function sic_render_form() {
 		</form>
 
 	</div>
-	
-<?php 
+
+<?php
 
 }
 
@@ -372,16 +372,16 @@ function sic_render_form() {
 function sic_validate_options( $input ) {
 	// Sanitize textbox input (strip html tags, and escape characters)
 	//fb_id (#), fb_app_id (#), fb_width (#), css_all (css), css_each (css), content_filter_priority (#), default_image (url), default_apple_image (url)
-	$input['fb_app_id'] =  wp_filter_nohtml_kses($input['fb_app_id']); 
-	$input['fb_width'] =  wp_filter_nohtml_kses($input['fb_width']); 
-	$input['css_all'] =  wp_filter_nohtml_kses($input['css_all']); 
-	$input['css_each'] =  wp_filter_nohtml_kses($input['css_each']); 
-	$input['content_filter_priority'] =  wp_filter_nohtml_kses($input['content_filter_priority']); 
-	$input['default_image'] =  wp_filter_nohtml_kses($input['default_image']); 
+	$input['fb_app_id'] =  wp_filter_nohtml_kses($input['fb_app_id']);
+	$input['fb_width'] =  wp_filter_nohtml_kses($input['fb_width']);
+	$input['css_all'] =  wp_filter_nohtml_kses($input['css_all']);
+	$input['css_each'] =  wp_filter_nohtml_kses($input['css_each']);
+	$input['content_filter_priority'] =  wp_filter_nohtml_kses($input['content_filter_priority']);
+	$input['default_image'] =  wp_filter_nohtml_kses($input['default_image']);
 	$input['default_apple_image'] =  wp_filter_nohtml_kses($input['default_apple_image']);
 	$input['box_title'] =  wp_filter_nohtml_kses($input['box_title']);
 	$input['box_title_css'] =  wp_filter_nohtml_kses($input['box_title_css']);
-	
+
 	return $input;
 }
 
@@ -402,7 +402,7 @@ function sic_plugin_action_links( $links, $file ) {
 function sic_opengraph_tags() {
 	$options = get_option('sic_options');
 	if(is_single() || is_page()){ // Post
-		if (have_posts()) : while (have_posts()) : the_post(); 
+		if (have_posts()) : while (have_posts()) : the_post();
 			echo "\n\t<meta property='og:title' content='",get_the_title($post->post_title),"' />",
 				"\n\t<meta property='og:url' content='",get_permalink(),"' />",
 				"\n\t<meta property='og:site_name' content='",get_option('blogname'),"' />",
@@ -417,7 +417,7 @@ function sic_opengraph_tags() {
 				}
 			}
 			echo "\n\t<meta itemprop='image' content='",$images_array[0],"' />";
-		endwhile; endif; 
+		endwhile; endif;
 	}
 	elseif(is_home() || is_front_page()) {
 		echo "\n\t<meta property='og:title' content='",get_option('blogname'),"' />",
@@ -427,7 +427,7 @@ function sic_opengraph_tags() {
 			"\n\t<meta property='og:type' content='blog' />",
 			"\n\t<meta itemprop='name' content='",get_option('siteurl'),"' />",
 			"\n\t<meta itemprop='description' content='",get_option('blogdescription'),"' />";
-			
+
 	}
 
 	else{
@@ -438,9 +438,9 @@ function sic_opengraph_tags() {
 			"\n\t<meta property='og:type' content='article' />",
 			"\n\t<meta itemprop='name' content='",get_option('siteurl'),"' />",
 			"\n\t<meta itemprop='description' content='",get_option('blogdescription'),"' />";
-			
+
 	}
-	
+
 	if ($options['default_image'] != '' )
 		echo "\n\t<link rel='shortcut icon' href='",$options['default_image'],"' />";
 	if ($options["default_apple_image"] != '' )
@@ -453,9 +453,9 @@ function sic_get_images() {
 	global $post, $posts;
 	global $current_blog;
 	$options = get_option('sic_options');
-	
+
 	$the_images = array();
-	
+
 	//Getting images attached to the post.
 	$args = array(
 		'post_type'      => 'attachment',
@@ -465,9 +465,9 @@ function sic_get_images() {
 		'post_status'    => null,
 		'post_parent'    => $post->ID
 	);
-	
+
 	$attachments = get_posts($args);
-	
+
 	// Check for attachments.
 	if ($attachments) {
 		// Cycling through attachments.
@@ -477,7 +477,7 @@ function sic_get_images() {
 			//add hostname if url is relative (starts with /)
 			if (substr($the_images[$i], 0, 1) == '/') {
 				$the_images[$i]	= get_option('siteurl') . $the_images[$i]; //'http://' . $current_blog->domain
-			}			
+			}
 		}
 	} else {
 		// there are no attachment for the current post.  Return default image.
@@ -485,20 +485,19 @@ function sic_get_images() {
 			$the_images[0] = $options['default_image']; //favicon
 		}
 	}
-	return $the_images;	
+	return $the_images;
 }
 
 /* Extracts the content, removes tags, replaces single and double quotes, cuts it, removes the caption shortcode */
 function sic_excerpt_max_charlength($charlength) {
 	$content = get_the_content(); //get the content
 	$content = strip_tags($content); // strip all html tags
-	$quotes = array('/"/',"/'/"); 
+	$quotes = array('/"/',"/'/");
 	$replacements = array('&quot;','&#39;');
 	$content = preg_replace($quotes,$replacements,$content);
-	$regex = "#([[]caption)(.*)([[]/caption[]])#e"; // the regex to remove the caption shortcude tag
-	$content = preg_replace($regex,'',$content); // remove the caption shortcude tag
+	$content = strip_shortcodes($content); // remove shortcodes
 	$content = preg_replace( '/\r\n/', ' ', trim($content) ); // remove all new lines
-	
+
 	$excerpt = $content;
 	$charlength++;
 	if(strlen($excerpt)>$charlength) {
@@ -531,7 +530,7 @@ function sic_snippets() {
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, \'script\', \'facebook-jssdk\'));
 		</script>
-		';	
+		';
 	}
 	if ($options['twitter_position'] != 0) {
 		echo '
@@ -546,7 +545,7 @@ function sic_snippets() {
 			}
 		}(document,"script","twitter-wjs");
 		</script>
-		';	    
+		';
 	}
 	if ($options['g_plus_position'] != 0) {
 		echo '
@@ -582,14 +581,14 @@ function sic_snippets() {
 				window.addEventListener("load", async_load, false);
 		})();
 		</script>
-		';	
+		';
 	}
 }
 
 //stuff in footer
 function sic_footer() {
 	echo '<!--Sharing is Caring!-->';
-	
+
 }
 
 function sic_filter_html_tag() { //Add fb namespace (if needed) and schema.org itemscope
@@ -613,7 +612,7 @@ function sic_content( $atts ){
 		'g' => 1,
 		'p' => 1
 	), $atts ) );
-	
+
 	$widgets= array();
 	if(in_the_loop()) {
 		$the_link = strip_tags(get_permalink());
@@ -623,11 +622,11 @@ function sic_content( $atts ){
 		$the_title = get_option('blogname');
 	}
 	$options = get_option('sic_options');
-	
+
 	if (($options["fb_position"] != 0) && ($f != 0)) {
 
 		if ($options['html5'] == "0") {
-			$widgets[$options["fb_position"]] = 
+			$widgets[$options["fb_position"]] =
 			sprintf(
 				'<div class="sic-button sic-facebook" style="display:inline;%s"><fb:like href="%s" send="false" layout="%s" width="%s" show_faces="%s" action="%s" colorscheme="%s" font="%s"></fb:like></div>',
 				$options["css_each"],
@@ -638,9 +637,9 @@ function sic_content( $atts ){
 				$options["fb_action"],
 				$options["fb_colorscheme"],
 				$options["fb_font"]
-			);		
+			);
 		} else {
-			$widgets[$options["fb_position"]] = 
+			$widgets[$options["fb_position"]] =
 			sprintf(
 				'<div class="sic-button sic-facebook" style="display:inline;%s"><div class="fb-like" data-href="%s" data-send="false" data-layout="%s" data-width="%s" data-show-faces="%s" data-action="%s" data-colorscheme="%s" data-font="%s"></div></div>',
 				$options["css_each"],
@@ -651,12 +650,12 @@ function sic_content( $atts ){
 				$options["fb_action"],
 				$options["fb_colorscheme"],
 				$options["fb_font"]
-			);	
-		}  
+			);
+		}
 	}
 
 	if (($options["twitter_position"] != 0) && ($t != 0)) {
-		$widgets[$options["twitter_position"]] = 
+		$widgets[$options["twitter_position"]] =
 		sprintf(
 			'<div class="sic-button sic-twitter" style="display:inline;%s"><div class="twitter-button"><a href="https://twitter.com/share" class="twitter-share-button" data-url="%s" data-text="%s" data-count="%s" data-size="%s">Tweet</a></div></div>',
 			$options["css_each"],
@@ -666,10 +665,10 @@ function sic_content( $atts ){
 			$options["twitter_size"]
 		);
 	}
-	
+
 	if (($options["g_plus_position"] != 0) && ($g != 0)) {
 		if ($options['html5'] == "0") {
-			$widgets[$options["g_plus_position"]] = 
+			$widgets[$options["g_plus_position"]] =
 			sprintf(
 				'<div class="sic-button sic-gplus" style="display:inline;%s"><g:plusone size="%s" annotation= "%s" href="%s"></g:plusone></div>',
 				$options["css_each"],
@@ -678,20 +677,20 @@ function sic_content( $atts ){
 				$the_link
 			);
 		} else {
-			$widgets[$options["g_plus_position"]] = 
+			$widgets[$options["g_plus_position"]] =
 			sprintf(
 				'<div class="sic-button sic-gplus" style="display:inline;%s"><div class="g-plusone" data-size="%s" data-annotation= "%s" data-href="%s"></div></div>',
 				$options["css_each"],
 				$options["g_plus_size"],
 				$options["g_plus_annotation"],
 				$the_link
-			);			
+			);
 		}
 	}
-	
-	if (($options["pinterest_position"] != 0) && ($p != 0)) {  
+
+	if (($options["pinterest_position"] != 0) && ($p != 0)) {
 		$image_array = sic_get_images();
-		$widgets[$options["pinterest_position"]] = 
+		$widgets[$options["pinterest_position"]] =
 		sprintf(
 			'<div class="sic-button sic-pinterest" style="display:inline;%s"><div class="pinterest-button"><a href="http://pinterest.com/pin/create/button/?url=%s&amp;media=%s&amp;description=%s" class="pin-it-button" count-layout="%s">Pin It</a></div></div>',
 			$options["css_each"],
@@ -700,10 +699,10 @@ function sic_content( $atts ){
 			$the_title,
 			$options["pinterest_layout"]
 		);
-	}	
-	
+	}
+
 	ksort($widgets);
-	
+
 	$sic_content = '<div class="sic-box" style="' . $options["css_all"] . '">';
 	$sic_content .= '<div class="sic-title" style="' . $options["box_title_css"]. '">' . $options["box_title"] . '</div>';
 	foreach ($widgets as $widget) {
@@ -734,17 +733,17 @@ function sic_content_filter($content, $force = false) {
 		($options["authors"] && is_author()) ||
 		($options["searches"] && is_search()) ||
 		($options["attachments"] && is_attachment()) ||
-		$custom_post_type_yepnope		
+		$custom_post_type_yepnope
 		)
 		)
 		return $content;
-	
+
 	$sic_content = sic_content( array('f' => 1,'t' => 1,'g' => 1,'p' => 1) );
 	if ($options["above_post"] == 1)
 		$content = $sic_content . $content;
 	if ($options["below_post"] == 1)
 		$content .= $sic_content;
-	
+
 	return $content;
 } //end function sic_content_filter
 
